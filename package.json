@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "vue-cli-service build --target lib --name babs-ui --dest dist ./examples/index.ts",
+    "build": "vue-cli-service build --target lib --name base-ui --dest dist ./packages/main.js",
     "lint": "vue-cli-service lint ./packages ./examples ./ --ext .vue,.js ",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

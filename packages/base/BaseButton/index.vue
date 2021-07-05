@@ -1,7 +1,8 @@
 <script>
-import btnConfig from './btnConfig';
+import { defineComponent } from 'vue';
+import btnConfig from './btnConfig.js';
 
-export default {
+export default defineComponent({
   name: 'BaseButton',
 
   props: {
@@ -49,7 +50,7 @@ export default {
       </button>
     );
   },
-};
+});
 </script>
 <style lang="less" scoped>
 .u-base-button {

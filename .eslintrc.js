@@ -18,6 +18,9 @@ module.exports = {
     'no-unused-expressions': 0,
     'no-param-reassign': 0,
     radix: 0,
+    'func-names': 0,
+    'import/no-unresolved': 0,
+    'import/extensions': 0,
   },
   overrides: [
     {
