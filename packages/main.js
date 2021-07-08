@@ -1,16 +1,20 @@
-import components from './index';
+import components from './index.js';
 
-const install = function (Vue) {
-  if (install.installed) return;
+function install(app, opt) {
   components.forEach((component) => {
-    Vue.use(component);
+    const name = opt?.tag ? `${opt.tag}-${component.name}` : `Base${component.name}`;
+    component.name = name;
+    app.component(name, component);
   });
-};
-//  全局引用可自动安装
-if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue);
 }
+
 export default {
   install,
-  ...components,
 };
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(install);
+  if (install.installed) {
+    install.installed = false;
+  }
+}

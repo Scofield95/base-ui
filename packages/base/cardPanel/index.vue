@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'BaseCardPanel',
+  name: 'card-panel',
   props: {
     radius: {
       type: Boolean,
@@ -27,7 +27,7 @@ export default {
 <style lang="less" scoped>
 .open-panel {
   width: 100%;
-  /deep/.g-card {
+  :deep(.g-card) {
     width: 100%;
   }
   .header-title {

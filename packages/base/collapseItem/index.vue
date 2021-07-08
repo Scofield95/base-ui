@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'BaseCollapseItem',
+  name: 'collapse-item',
 
   props: {
     headerOpt: {

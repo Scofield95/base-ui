@@ -24,7 +24,7 @@ const config = {
 
 const color = {};
 export default {
-  name: 'BaseSwitch',
+  name: 'switch',
 
   props: {
     size: {

@@ -1,8 +1,7 @@
 <script>
-import { defineComponent } from 'vue';
 import btnConfig from './btnConfig.js';
 
-export default defineComponent({
+export default {
   name: 'BaseButton',
 
   props: {
@@ -34,7 +33,7 @@ export default defineComponent({
     });
 
     const btnClick = () => {
-      this.$attrs.click?.();
+      // this.$attrs.click?.();
     };
 
     return (
@@ -50,7 +49,7 @@ export default defineComponent({
       </button>
     );
   },
-});
+};
 </script>
 <style lang="less" scoped>
 .u-base-button {

@@ -10,8 +10,8 @@ module.exports = {
   ],
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = {
-      '@': path.resolve(__dirname, '../examples'),
-      '~': path.resolve(__dirname, '../packages'),
+      '~': path.resolve(__dirname, '../examples'),
+      '@': path.resolve(__dirname, '../packages'),
       'vue': 'vue/dist/vue.esm-bundler.js'
     }
 

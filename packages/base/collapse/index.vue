@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-  name: 'BaseCollapse',
+  name: 'collapse',
 
   props: {
     headerOpt: Array,
