@@ -1,4 +1,4 @@
-import components from './index.js';
+import components from './index.ts';
 
 function install(app, opt) {
   components.forEach((component) => {

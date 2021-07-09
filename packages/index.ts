@@ -1,4 +1,4 @@
-import Button from '@/base/button/index.vue';
+import Button from '@/base/button/src/Button.vue';
 import Card from '@/base/card/index.vue';
 import CardPanel from '@/base/cardPanel/index.vue';
 import Collapse from '@/base/collapse/index.vue';
