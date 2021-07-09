@@ -1,8 +1,8 @@
 const path = require('path');
 module.exports = {
   "stories": [
-    "../examples/**/*.stories.mdx",
-    "../examples/**/*.stories.@(js|jsx|ts|tsx)"
+    "../packages/**/*.stories.mdx",
+    "../packages/**/*.stories.@(js|jsx|ts|tsx)"
   ],
   "addons": [
     "@storybook/addon-links",
@@ -10,7 +10,6 @@ module.exports = {
   ],
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias = {
-      '~': path.resolve(__dirname, '../examples'),
       '@': path.resolve(__dirname, '../packages'),
       'vue': 'vue/dist/vue.esm-bundler.js'
     }
