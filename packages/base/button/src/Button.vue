@@ -1,4 +1,5 @@
 <script>
+import Color from 'color';
 import buttonConfig from './buttonConfig.ts';
 
 export default {
@@ -32,7 +33,7 @@ export default {
 
   setup(props) {
     const { colorMap, sizeMap } = buttonConfig;
-    console.log(props.type, colorMap, colorMap[props.type]);
+    // console.log(props.type, colorMap, colorMap[props.type]);
 
     // 计算组件的大小
     function getSize(size) {
@@ -66,6 +67,8 @@ export default {
         '--size': getSize(props.size),
 
         '--background': getBackground(props.type, props.color),
+        '--background-hover': Color(getBackground(props.type, props.color)).lighten(0.1).string(),
+        '--background-active': Color(getBackground(props.type, props.color)).darken(0.1).string(),
         '--fontColor': getFontColor(props.type),
 
         '--borderstyle': props.dashed ? 'dashed' : 'solid',
@@ -114,10 +117,20 @@ export default {
 
   outline: none;
   cursor: pointer;
+
+  &:hover{
+    background: var(--background-hover)
+  }
+
+  &:active{
+    background: var(--background-active)
+  }
+
   &.block {
     width: var(--size);
     padding: 0;
   }
+
   &.isBlock {
     width: 100% !important;
   }

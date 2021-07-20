@@ -9,6 +9,7 @@
   },
   "main": "./dist/base-x-ui.umd.min.js",
   "dependencies": {
+    "color": "3.2.1",
     "core-js": "^3.6.5",
     "vue": "^3.1.4"
   },

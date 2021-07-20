@@ -16,10 +16,10 @@
 
 <script>
 const config = {
-  mini: '0.24rem',
-  small: '0.32rem',
-  default: '0.44rem',
-  large: '0.56rem',
+  mini: '24px',
+  small: '32px',
+  default: '44px',
+  large: '56px',
 };
 
 const color = {};

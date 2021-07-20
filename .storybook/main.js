@@ -28,6 +28,12 @@ module.exports = {
       use: ['style-loader', 'css-loader', 'less-loader'],
       include: path.resolve(__dirname, '../'),
     });
+
+    // config.module.rules.push({
+    //   test: /\.vue$/,
+    //   use: ['raw-loader'],
+    //   include: path.resolve(__dirname, '../'),
+    // });
     // Return the altered config
     return config;
   },

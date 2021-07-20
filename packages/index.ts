@@ -5,6 +5,8 @@ import Collapse from '@/base/collapse/index.vue';
 import CollapseItem from '@/base/collapseItem/index.vue';
 import Switch from '@/base/switch/index.vue';
 
+import Space from '@/layout/space/src/Space.vue';
+
 export default [
   Button,
   Card,
@@ -12,4 +14,6 @@ export default [
   Collapse,
   CollapseItem,
   Switch,
+
+  Space,
 ];
