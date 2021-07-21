@@ -1,13 +1,14 @@
 <script>
-import Color from 'color';
+import { inject } from 'vue'
+import Color from 'color'
 
 const sizeMap = {
   mini: 20,
   samll: 24,
   default: 32,
   large: 42,
-  largeBig: 50,
-};
+  largeBig: 50
+}
 export default {
   name: 'Button',
 
@@ -16,85 +17,81 @@ export default {
   props: {
     type: {
       type: String,
-      default: undefined,
+      default: undefined
     }, // [primary, success, warning, error]
     dashed: {
       // 虚线/实线
       type: Boolean,
-      default: false,
+      default: false
     },
     plain: {
       // 朴素形态
       type: Boolean,
-      default: false,
+      default: false
     },
     color: {
       type: String,
-      default: undefined,
+      default: undefined
     }, // primary,error,waring
-    label: String,
     size: String,
     icon: String,
     block: Boolean,
-    isBlock: Boolean,
+    isBlock: Boolean
   },
 
-  data() {
-    return {
-      BaseColor: this.BaseColor,
-    };
-  },
-  setup(props) {
-    console.log('props', props);
-  },
-
-  render() {
-    const {
-      $props, $slot, icon, block, isBlock, label, BaseColor,
-    } = this;
-
+  setup (props) {
+    const BaseColor = inject('BaseColor')
+    console.log('BaseColor', BaseColor)
     // 计算组件的大小
-    function getSize(props) {
-      return `${props.size ? sizeMap[props.size] : sizeMap.default}px`;
+    function getSize (props) {
+      return `${props.size ? sizeMap[props.size] : sizeMap.default}px`
     }
     // 计算组件的background
-    function getBackground(props) {
+    function getBackground (props) {
       if (props.dashed) {
-        return '#fff';
+        return '#fff'
       }
       if (props.type) {
-        return BaseColor[props.type];
+        return BaseColor[props.type]
       } if (props.color) {
-        return '#ddd';
+        return '#ddd'
       }
-      return BaseColor.default;
+      return '#fff'
     }
     // 计算组件的字体颜色
-    function getFontColor(props) {
+    function getFontColor (props) {
       if (props.dashed) {
-        return BaseColor[props.type];
+        return BaseColor[props.type]
       }
       if (props.type) {
-        return '#fff';
+        return '#fff'
       }
-      return '#333';
+      return '#333'
     }
 
-    const buttonStyle = {
-      '--size': getSize($props),
+    return {
+      buttonStyle: {
+        '--size': getSize(props),
 
-      '--background': getBackground($props),
-      '--background-hover': Color(getBackground($props)).lighten(0.1).string(),
-      '--background-active': Color(getBackground($props)).darken(0.1).hex(),
-      '--fontColor': getFontColor($props),
+        '--background': getBackground(props),
+        '--background-hover': Color(getBackground(props)).lighten(0.1).string(),
+        '--background-active': Color(getBackground(props)).darken(0.1).hex(),
+        '--fontColor': getFontColor(props),
 
-      '--borderstyle': $props.dashed ? 'dashed' : 'solid',
-      '--borderColor': $props.type ? BaseColor[$props.type] : '#dcdfe6',
-    };
+        '--borderstyle': props.dashed ? 'dashed' : 'solid',
+        '--borderColor': props.type ? BaseColor[props.type] : '#dcdfe6'
+      }
+    }
+  },
+
+  render () {
+    const {
+      $slots, icon, block, isBlock, buttonStyle
+    } = this
 
     const btnClick = () => {
-      this.$attrs.click?.();
-    };
+      // this.$attrs.click?.()
+    }
 
     return (
       <button
@@ -105,12 +102,12 @@ export default {
         on-click={btnClick}
       >
         <i class={`iconfont ${icon}`}></i>
-        {label || $slot}
+        {$slots.default()}
       </button>
-    );
-  },
+    )
+  }
 
-};
+}
 </script>
 <style lang='less' scoped>
 .u-base-button {

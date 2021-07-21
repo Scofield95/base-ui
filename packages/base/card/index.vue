@@ -4,20 +4,20 @@ export default {
 
   props: {
     title: {
-      type: [String, undefined],
-    },
+      type: [String, undefined]
+    }
   },
 
-  render() {
-    const { title, $slots } = this;
+  render () {
+    const { title, $slots } = this
     return (
-            <div class="g-card">
-                {title ? <header class="u-card-header">{title}</header> : null}
-                <div class="u-card-content">{$slots.default}</div>
-            </div>
-    );
-  },
-};
+      <div class="g-card">
+        {title ? <header class="u-card-header">{title}</header> : null}
+        <div class="u-card-content">{$slots.default}</div>
+      </div>
+    )
+  }
+}
 </script>
 <style lang="less" scoped>
 .g-card {

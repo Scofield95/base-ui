@@ -3,6 +3,9 @@
 </template>
 
 <script>
+import { provide, reactive, ref } from 'vue'
+
+// Pixel unit
 export default {
   name: 'configTheme',
 
@@ -14,28 +17,19 @@ export default {
         success: '#67c23a',
         info: '#909399',
         warning: '#e6a23c',
-        danger: '#f56c6c',
-      }),
-      // validator(value) {
-      //   // 这个值必须匹配下列字符串中的一个
-      //   let status;
-      //   ['primary', 'success', 'info', 'warning', 'danger'].forEach((item) => {
-      //     if (value[item]) {
-      //       status = true;
-      //     } else {
-      //       status = false;
-      //     }
-      //   });
-      //   return status;
-      // },
-    },
+        danger: '#f56c6c'
+      })
+    }
   },
-  provide() {
-    return {
-      BaseColor: this.BaseColor,
-    };
-  },
-};
+
+  setup (props) {
+    const pixelUnit = ref('North Pole')
+    const BaseColor = reactive(props.BaseColor)
+
+    provide('pixelUnit', pixelUnit)
+    provide('BaseColor', BaseColor)
+  }
+}
 </script>
 
 <style>

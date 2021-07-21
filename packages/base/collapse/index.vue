@@ -15,64 +15,64 @@ export default {
     accordion: Boolean,
     value: {
       type: [Array, String, Number],
-      default() {
-        return [];
-      },
-    },
+      default () {
+        return []
+      }
+    }
   },
 
-  data() {
+  data () {
     return {
-      activeNames: [].concat(this.value),
-    };
+      activeNames: [].concat(this.value)
+    }
   },
 
-  provide() {
+  provide () {
     return {
-      collapse: this,
-    };
+      collapse: this
+    }
   },
 
   watch: {
-    value(value) {
-      this.activeNames = [].concat(value);
-    },
+    value (value) {
+      this.activeNames = [].concat(value)
+    }
   },
 
   methods: {
-    setActiveNames(activeNames) {
+    setActiveNames (activeNames) {
       // eslint-disable-next-line no-param-reassign
-      activeNames = [].concat(activeNames);
-      const value = this.accordion ? activeNames[0] : activeNames;
-      this.activeNames = activeNames;
-      this.$emit('input', value);
-      this.$emit('change', value);
+      activeNames = [].concat(activeNames)
+      const value = this.accordion ? activeNames[0] : activeNames
+      this.activeNames = activeNames
+      this.$emit('input', value)
+      this.$emit('change', value)
     },
-    handleItemClick(item) {
+    handleItemClick (item) {
       if (this.accordion) {
         this.setActiveNames(
           (this.activeNames[0] || this.activeNames[0] === 0) && this.activeNames[0] === item.name
             ? ''
-            : item.name,
-        );
+            : item.name
+        )
       } else {
-        const activeNames = this.activeNames.slice(0);
-        const index = activeNames.indexOf(item.name);
+        const activeNames = this.activeNames.slice(0)
+        const index = activeNames.indexOf(item.name)
 
         if (index > -1) {
-          activeNames.splice(index, 1);
+          activeNames.splice(index, 1)
         } else {
-          activeNames.push(item.name);
+          activeNames.push(item.name)
         }
-        this.setActiveNames(activeNames);
+        this.setActiveNames(activeNames)
       }
-    },
+    }
   },
 
-  created() {
+  created () {
     // this.$on('item-click', this.handleItemClick);
-  },
-};
+  }
+}
 </script>
 
 <style lang="less" scoped>

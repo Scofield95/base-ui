@@ -19,43 +19,43 @@ const config = {
   mini: '24px',
   small: '32px',
   default: '44px',
-  large: '56px',
-};
+  large: '56px'
+}
 
-const color = {};
+const color = {}
 export default {
   name: 'switch',
 
   props: {
     size: {
       type: String, // [default, small, large]
-      default: 'default',
+      default: 'default'
     },
-    title: String,
+    title: String
   },
   model: {
     prop: 'checked',
-    event: 'change',
+    event: 'change'
   },
 
-  data() {
+  data () {
     return {
       config,
-      color,
-    };
+      color
+    }
   },
 
   computed: {
-    id() {
-      return `checked_${parseInt(1000 * Math.random())}`;
-    },
+    id () {
+      return `checked_${parseInt(1000 * Math.random())}`
+    }
   },
   methods: {
-    changeValue(e) {
-      this.$emit('change', e.target.checked);
-    },
-  },
-};
+    changeValue (e) {
+      this.$emit('change', e.target.checked)
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>

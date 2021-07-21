@@ -4,25 +4,25 @@ export default {
   props: {
     radius: {
       type: Boolean,
-      default: () => false,
+      default: () => false
     },
 
     title: {
-      type: String,
-    },
+      type: String
+    }
   },
-  render() {
-    const { title, radius, $slots } = this;
-    const { header } = $slots;
+  render () {
+    const { title, radius, $slots } = this
+    const { header } = $slots
     // console.log('slot', this.$slots);
     return (
       <div class="open-panel">
         <div class={`header-title ${radius ? 'radius' : ''}`}>{header || <span class={radius ? '' : 'border-left'}>{title}</span>}</div>
         <div class="panel-body">{$slots.default}</div>
       </div>
-    );
-  },
-};
+    )
+  }
+}
 </script>
 <style lang="less" scoped>
 .open-panel {
