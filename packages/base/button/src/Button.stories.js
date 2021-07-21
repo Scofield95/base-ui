@@ -1,4 +1,5 @@
 import BaseSpace from '@/layout/space/src/Space.vue';
+import BaseConfigTheme from '@/config/configTheme/src/ConfigTheme.vue';
 import BaseButton from './Button.vue';
 
 export default {
@@ -8,15 +9,15 @@ export default {
     type: {
       control: {
         type: 'select',
-        options: [undefined, 'primary', 'success', 'warning', 'error'],
+        options: ['default', 'primary', 'success', 'info', 'warning', 'danger'],
       },
-      description: '组件的类型，优先级高于color',
-      // table: {
-      //   type: {
-      //     summary: 'string',
-      //     detail: '测试干啥用的',
-      //   },
-      // },
+      description: '按钮的 type 分别为 default, primary, success, info, warning, danger。优先级高于color',
+      table: {
+        type: {
+          summary: '详情',
+          detail: '按钮的 type 分别为 default, primary, success, info, warning, danger。',
+        },
+      },
     },
     color: {
       control: 'color',
@@ -39,11 +40,11 @@ export default {
 };
 
 const Template = (args) => ({
-  components: { BaseButton },
+  components: { BaseButton, BaseConfigTheme },
   setup() {
     return { args };
   },
-  template: '<base-button v-bind="args"></base-button>',
+  template: '<BaseConfigTheme><base-button v-bind="args"></base-button></BaseConfigTheme>',
 });
 
 const TemplateGroup = (args) => ({

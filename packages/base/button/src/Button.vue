@@ -1,9 +1,17 @@
 <script>
 import Color from 'color';
-import buttonConfig from './buttonConfig.ts';
 
+const sizeMap = {
+  mini: 20,
+  samll: 24,
+  default: 32,
+  large: 42,
+  largeBig: 50,
+};
 export default {
   name: 'Button',
+
+  inject: ['BaseColor'],
 
   props: {
     type: {
@@ -31,56 +39,58 @@ export default {
     isBlock: Boolean,
   },
 
-  setup(props) {
-    const { colorMap, sizeMap } = buttonConfig;
-    // console.log(props.type, colorMap, colorMap[props.type]);
-
-    // 计算组件的大小
-    function getSize(size) {
-      return `${size ? sizeMap[size] : sizeMap.default}px`;
-    }
-    // 计算组件的background
-    function getBackground(type, color) {
-      if (props.dashed) {
-        return '#fff';
-      }
-      if (type) {
-        return colorMap[type];
-      } if (color) {
-        return '#ddd';
-      }
-      return colorMap.default;
-    }
-    // 计算组件的字体颜色
-    function getFontColor(type) {
-      if (props.dashed) {
-        return colorMap[props.type];
-      }
-      if (type) {
-        return '#fff';
-      }
-      return '#333';
-    }
-    // 计算组件的
+  data() {
     return {
-      buttonStyle: {
-        '--size': getSize(props.size),
-
-        '--background': getBackground(props.type, props.color),
-        '--background-hover': Color(getBackground(props.type, props.color)).lighten(0.1).string(),
-        '--background-active': Color(getBackground(props.type, props.color)).darken(0.1).string(),
-        '--fontColor': getFontColor(props.type),
-
-        '--borderstyle': props.dashed ? 'dashed' : 'solid',
-        '--borderColor': props.type ? colorMap[props.type] : '#dcdfe6',
-      },
+      BaseColor: this.BaseColor,
     };
+  },
+  setup(props) {
+    console.log('props', props);
   },
 
   render() {
     const {
-      buttonStyle, icon, block, isBlock, label, $slot,
+      $props, $slot, icon, block, isBlock, label, BaseColor,
     } = this;
+
+    // 计算组件的大小
+    function getSize(props) {
+      return `${props.size ? sizeMap[props.size] : sizeMap.default}px`;
+    }
+    // 计算组件的background
+    function getBackground(props) {
+      if (props.dashed) {
+        return '#fff';
+      }
+      if (props.type) {
+        return BaseColor[props.type];
+      } if (props.color) {
+        return '#ddd';
+      }
+      return BaseColor.default;
+    }
+    // 计算组件的字体颜色
+    function getFontColor(props) {
+      if (props.dashed) {
+        return BaseColor[props.type];
+      }
+      if (props.type) {
+        return '#fff';
+      }
+      return '#333';
+    }
+
+    const buttonStyle = {
+      '--size': getSize($props),
+
+      '--background': getBackground($props),
+      '--background-hover': Color(getBackground($props)).lighten(0.1).string(),
+      '--background-active': Color(getBackground($props)).darken(0.1).hex(),
+      '--fontColor': getFontColor($props),
+
+      '--borderstyle': $props.dashed ? 'dashed' : 'solid',
+      '--borderColor': $props.type ? BaseColor[$props.type] : '#dcdfe6',
+    };
 
     const btnClick = () => {
       this.$attrs.click?.();
@@ -99,6 +109,7 @@ export default {
       </button>
     );
   },
+
 };
 </script>
 <style lang='less' scoped>
