@@ -7,6 +7,8 @@ import Switch from '@/base/switch/index.vue'
 
 import Space from '@/layout/space/src/Space.vue'
 
+import ConfigTheme from '@/config/configTheme/src/ConfigTheme.vue'
+
 export default [
   Button,
   Card,
@@ -15,5 +17,7 @@ export default [
   CollapseItem,
   Switch,
 
-  Space
+  Space,
+
+  ConfigTheme
 ]
