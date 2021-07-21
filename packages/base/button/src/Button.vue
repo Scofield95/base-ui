@@ -1,6 +1,6 @@
 <script>
 import { inject } from 'vue'
-import Color from 'color'
+import { useButtonBackground, useButtonBackgroundHover, useButtonBackgroundActive, useButtonFontColor } from '@/theme/useButtonTheme'
 
 const sizeMap = {
   mini: 20,
@@ -11,8 +11,6 @@ const sizeMap = {
 }
 export default {
   name: 'Button',
-
-  inject: ['BaseColor'],
 
   props: {
     type: {
@@ -41,42 +39,19 @@ export default {
 
   setup (props) {
     const BaseColor = inject('BaseColor')
-    console.log('BaseColor', BaseColor)
     // 计算组件的大小
     function getSize (props) {
       return `${props.size ? sizeMap[props.size] : sizeMap.default}px`
-    }
-    // 计算组件的background
-    function getBackground (props) {
-      if (props.dashed) {
-        return '#fff'
-      }
-      if (props.type) {
-        return BaseColor[props.type]
-      } if (props.color) {
-        return '#ddd'
-      }
-      return '#fff'
-    }
-    // 计算组件的字体颜色
-    function getFontColor (props) {
-      if (props.dashed) {
-        return BaseColor[props.type]
-      }
-      if (props.type) {
-        return '#fff'
-      }
-      return '#333'
     }
 
     return {
       buttonStyle: {
         '--size': getSize(props),
 
-        '--background': getBackground(props),
-        '--background-hover': Color(getBackground(props)).lighten(0.1).string(),
-        '--background-active': Color(getBackground(props)).darken(0.1).hex(),
-        '--fontColor': getFontColor(props),
+        '--background': useButtonBackground(props, BaseColor),
+        '--background-hover': useButtonBackgroundHover(props, BaseColor),
+        '--background-active': useButtonBackgroundActive(props, BaseColor),
+        '--fontColor': useButtonFontColor(props, BaseColor),
 
         '--borderstyle': props.dashed ? 'dashed' : 'solid',
         '--borderColor': props.type ? BaseColor[props.type] : '#dcdfe6'

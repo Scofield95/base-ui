@@ -1,13 +1,18 @@
 import Color from 'color'
 
-const defaultColor = {
-  default: '#ffffff',
-  primary: '#409eff',
-  success: '#67c23a',
-  info: '#909399',
-  warning: '#e6a23c',
-  danger: '#f56c6c'
+// 计算组件的background
+export function useBackground (props, BaseColor) {
+  if (props.dashed) {
+    return '#fff'
+  }
+  if (props.type) {
+    return BaseColor[props.type]
+  } if (props.color) {
+    return '#ddd'
+  }
+  return '#fff'
 }
 
-window.BaseColor = Color
-console.log('color', defaultColor)
+export function useButtonBackgroundHover (props, BaseColor) {
+  return Color(useBackground(props, BaseColor)).lighten(0.1).string()
+}

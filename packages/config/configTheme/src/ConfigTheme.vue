@@ -23,7 +23,7 @@ export default {
   },
 
   setup (props) {
-    const pixelUnit = ref('North Pole')
+    const pixelUnit = ref('px')
     const BaseColor = reactive(props.BaseColor)
 
     provide('pixelUnit', pixelUnit)
