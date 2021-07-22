@@ -1,5 +1,6 @@
 import BaseConfigTheme from '@/config/configTheme/src/ConfigTheme.vue'
 import BaseButton from './Button.vue'
+import '@/style/reset.less'
 
 export default {
   title: '基础组件/Button 按钮',

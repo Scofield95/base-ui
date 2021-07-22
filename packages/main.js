@@ -1,5 +1,5 @@
 import components from './index.ts'
-
+import '@/style/reste.less'
 function install (app, opt) {
   components.forEach((component) => {
     const name = opt?.tag ? `${opt.tag}-${component.name}` : `Base${component.name}`

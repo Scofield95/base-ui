@@ -1,4 +1,5 @@
 import BaseList from './List.vue'
+import '@/style/reset.less'
 
 export default {
   title: '数据展示组件/ 虚拟列表',

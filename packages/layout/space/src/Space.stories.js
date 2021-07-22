@@ -1,6 +1,7 @@
 import BaseSpace from '@/layout/space/src/Space.vue'
 import BaseConfigTheme from '@/config/configTheme/src/ConfigTheme.vue'
 import BaseButton from '@/base/button/src/Button.vue'
+import '@/style/reset.less'
 
 export default {
   title: '布局组件/ Space 间距',

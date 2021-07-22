@@ -81,9 +81,6 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-*{
-  box-sizing: border-box;
-}
 .ba-virtual-list{
   overflow: auto;
 }
