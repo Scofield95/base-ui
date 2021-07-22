@@ -19,7 +19,9 @@ const Template = (args) => ({
   setup () {
     return { args }
   },
-  template: '<BaseConfigTheme v-bind="args"><base-button type="success">按钮</base-button></BaseConfigTheme>'
+  template: `<BaseConfigTheme v-bind="args">
+              <base-button type="success">按钮</base-button>
+            </BaseConfigTheme>`
 })
 
 export const Theme = Template.bind({})

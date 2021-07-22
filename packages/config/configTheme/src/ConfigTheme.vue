@@ -13,6 +13,7 @@ export default {
     BaseColor: {
       type: Object,
       default: () => ({
+        default: '#fff',
         primary: '#409eff',
         success: '#67c23a',
         info: '#909399',

@@ -1,13 +1,13 @@
 <script>
 import { inject } from 'vue'
-import { useButtonBackground, useButtonBackgroundHover, useButtonBackgroundActive, useButtonFontColor } from '@/theme/useButtonTheme'
+import { useButtonBackground, useButtonBackgroundHover, useButtonBackgroundActive, useButtonFontColor } from '@/theme/useButtonTheme.ts'
 
 const sizeMap = {
   mini: 20,
   samll: 24,
   default: 32,
   large: 42,
-  largeBig: 50
+  largeBig: 64
 }
 export default {
   name: 'Button',
@@ -31,10 +31,19 @@ export default {
       type: String,
       default: undefined
     }, // primary,error,waring
-    size: String,
+    size: {
+      type: String,
+      default: 'default'
+    },
     icon: String,
-    block: Boolean,
-    isBlock: Boolean
+    block: {
+      type: Boolean,
+      default: false
+    },
+    isBlock: {
+      type: Boolean,
+      default: false
+    }
   },
 
   setup (props) {
@@ -43,18 +52,18 @@ export default {
     function getSize (props) {
       return `${props.size ? sizeMap[props.size] : sizeMap.default}px`
     }
-
+    console.log(props.type)
     return {
       buttonStyle: {
         '--size': getSize(props),
 
-        '--background': useButtonBackground(props, BaseColor),
-        '--background-hover': useButtonBackgroundHover(props, BaseColor),
-        '--background-active': useButtonBackgroundActive(props, BaseColor),
-        '--fontColor': useButtonFontColor(props, BaseColor),
+        '--background': props.dashed ? '#fff' : useButtonBackground(props, BaseColor),
+        '--background-hover': props.dashed ? '#fff' : useButtonBackgroundHover(props, BaseColor),
+        '--background-active': props.dashed ? '#fff' : useButtonBackgroundActive(props, BaseColor),
+        '--font-color': props.dashed ? BaseColor[props.type === 'default' ? 'primary' : props.type] : useButtonFontColor(props, BaseColor),
 
         '--borderstyle': props.dashed ? 'dashed' : 'solid',
-        '--borderColor': props.type ? BaseColor[props.type] : '#dcdfe6'
+        '--borderColor': props.type ? BaseColor[props.type === 'default' ? 'primary' : props.type] : '#dcdfe6'
       }
     }
   },
@@ -65,7 +74,7 @@ export default {
     } = this
 
     const btnClick = () => {
-      // this.$attrs.click?.()
+      this.$attrs.click?.()
     }
 
     return (
@@ -94,7 +103,7 @@ export default {
   padding: 0 10px;
 
   background: var(--background, "#fff");
-  color: var(--fontColor, "#333");
+  color: var(--font-color, "#333");
   border: 1px var(--borderstyle) var(--borderColor, "#333");
   border-radius: 6px;
 
