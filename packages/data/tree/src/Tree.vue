@@ -118,10 +118,16 @@ export default {
         if (expandedAll.value) {
           expandedKeys.value.push(item.id)
           item.expanded = expandedAll.value
-        } else if (expandedKeys.value.includes(item.id)) {
-          item.expanded = true
+          item.show = true
+        } else {
+          if (item.level === 0) {
+            item.show = true
+          }
+          if (expandedKeys.value.includes(item.id)) {
+            item.expanded = true
+            item.show = true
+          }
         }
-        item.show = true
         return item
       })
       useRenderTreeItem()

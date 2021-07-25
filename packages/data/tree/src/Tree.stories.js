@@ -59,6 +59,6 @@ function mockTree (path = '0', level = 3, parent = null) {
 Tree.args = {
   data: mockTree(),
   defaultExpandedKeys: [],
-  defaultExpandAll: true,
+  defaultExpandAll: false,
   showCheckbox: false
 }
