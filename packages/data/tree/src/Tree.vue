@@ -73,25 +73,16 @@ export default {
 
     // 获得真是渲染的treeNode
     const useRenderTreeItem = () => {
-      const showNode = []
-      for (let i = index; i < treeNode.value.length; i++) {
-        if (showNode.length > size) break
-        const item = treeNode.value[i]
-        if (item.show) {
-          showNode.push(item)
-        }
-      }
-      renderNode.value = showNode
-      console.log(renderNode.value)
+      renderNode.value = treeNode.value.filter((item) => item.show).filter((item, i) => i >= index && i <= (index + size))
       containerHight.value = expandedKeys.value.length * 26
     }
     // 更新treeNode的状态
     const useUpdataTreeData = (target, state) => {
-      target.expanded = state
       target?.children?.forEach(item => {
-        item.expanded = state
         item.show = state
-        useUpdataTreeData(item, state)
+        if (item.expanded) {
+          useUpdataTreeData(item, state)
+        }
       })
     }
     // 更新expandedKeys
@@ -104,9 +95,9 @@ export default {
      */
     const handlerExpand = (item) => {
       console.timeEnd(new Date().getTime())
-      useUpdataTreeData(item, !item.expanded)
+      item.expanded = !item.expanded
+      useUpdataTreeData(item, item.expanded)
       useUpdataExpanded()
-      console.log(treeNode.value, expandedKeys.value)
       useRenderTreeItem()
       console.timeEnd(new Date().getTime())
     }
@@ -116,9 +107,6 @@ export default {
     const handlerScroll = () => {
       index = Math.ceil(root.value.scrollTop / 26)
       paddingTop.value = index * 26
-      // renderNode.value = treeNode.value.slice(index, index + size)
-      // containerHight.value = treeNode.value.length * 26
-      // console.log(index)
       useRenderTreeItem()
     }
     /**
