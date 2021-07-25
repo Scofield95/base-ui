@@ -35,19 +35,18 @@ export default defineComponent({
 
     // paddingTop
     const paddingTop = ref(0)
+    // 容器高度
+    const containerHight = ref(data.value.length * itemHeight.value)
 
     // 设置真实渲染的list
     const virtualList = ref([])
 
-    // 容器高度
-    const containerHight = ref(data.value.length * itemHeight.value)
-
     // 滚动事件
     const handlerScroll = () => {
       // const range = [0, size.value]
-      const zhanweiSize = Math.floor(root.value.scrollTop / itemHeight.value)
-      paddingTop.value = zhanweiSize * itemHeight.value
-      virtualList.value = data.value.slice(0 + zhanweiSize, size.value + zhanweiSize)
+      const renderItemSize = Math.floor(root.value.scrollTop / itemHeight.value)
+      paddingTop.value = renderItemSize * itemHeight.value
+      virtualList.value = data.value.slice(0 + renderItemSize, size.value + renderItemSize)
       // console.log(Math.floor(root.value.scrollTop / itemHeight.value))
     }
     onMounted(() => {

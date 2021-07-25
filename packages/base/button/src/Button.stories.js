@@ -1,5 +1,5 @@
 import BaseConfigTheme from '@/config/configTheme/src/ConfigTheme.vue'
-import BaseButton from './Button.vue'
+import BaseButton from '@/base/button/src/Button.vue'
 import '@/style/reset.less'
 
 export default {
