@@ -60,5 +60,5 @@ Tree.args = {
   data: mockTree(),
   defaultExpandedKeys: [],
   defaultExpandAll: false,
-  showCheckbox: false
+  showCheckbox: true
 }

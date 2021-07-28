@@ -2,14 +2,14 @@
   <label
     :class="[
       'base-checkbox',
-      isChecked ? 'isChecked' : ''
+      isChecked ? 'isChecked' : '',
     ]"
     :style="baseStyle"
   >
-    <span class="base-checkbox_model">
+    <span :class="['base-checkbox_model', indeterminate ? 'is-indeterminate' : '']">
       <BaseIcon
         color="#fff"
-        type="CheckOutlined"
+        :type="(indeterminate && !isChecked) ? 'MinusOutlined' : 'CheckOutlined'"
       />
       <input
         v-model="model"
@@ -48,12 +48,20 @@ export default defineComponent({
       default: ''
     },
     value: {
-      type: String,
+      type: [String, Boolean],
       default: ''
+    },
+    checked: {
+      type: Boolean,
+      default: false
     },
     type: {
       type: String,
       default: 'primary'
+    },
+    indeterminate: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:modelValue', 'change'],
@@ -74,11 +82,16 @@ export default defineComponent({
       border: 1px solid var(--checkbox-theme);
     }
   }
+
   .base-checkbox_model{
     width: 18px;
     height: 18px;
     background: #fff;
     border: 1px solid #606266;
+    &.is-indeterminate{
+      background: var(--checkbox-theme);
+      border: 1px solid var(--checkbox-theme);
+  }
   }
   .base-input_checkbox{
     width: 0;

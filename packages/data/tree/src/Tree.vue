@@ -1,6 +1,7 @@
 <script>
 import { ref, toRefs } from 'vue'
 import Icon from '@/base/icon/src/Icon.vue'
+import BaseCheckBox from '@/base/checkbox/src/CheckBox.vue'
 
 function useFlatArray (array) {
   const flat = []
@@ -17,7 +18,8 @@ function useFlatArray (array) {
 }
 export default {
   components: {
-    Icon
+    Icon,
+    BaseCheckBox
   },
   props: {
     data: {
@@ -37,6 +39,10 @@ export default {
       type: Array,
       default: () => []
     },
+    defaultCheckedKeys: {
+      type: Array,
+      default: () => []
+    },
 
     showCheckbox: {
       type: Boolean,
@@ -44,7 +50,7 @@ export default {
     }
   },
   setup (props) {
-    const { data, defaultExpandAll, defaultExpandedKeys } = toRefs(props)
+    const { data, defaultExpandAll, defaultExpandedKeys, defaultCheckedKeys } = toRefs(props)
 
     // 获取根元素
     const root = ref(null)
@@ -70,13 +76,16 @@ export default {
     const expandedAll = ref(defaultExpandAll.value)
     const expandedKeys = ref([])
     expandedKeys.value = defaultExpandedKeys.value || []
+    // tree 选中状态数据保存
+    const checkedKeys = new Set(defaultCheckedKeys.value)
+    const checkedParents = new Set()
 
     // 获得真是渲染的treeNode
     const useRenderTreeItem = () => {
       renderNode.value = treeNode.value.filter((item) => item.show).filter((item, i) => i >= index && i <= (index + size))
       containerHight.value = expandedKeys.value.length * 26
     }
-    // 更新treeNode的状态
+    // 更新treeNode的展开收缩状态
     const useUpdataTreeData = (target, state) => {
       target?.children?.forEach(item => {
         item.show = state
@@ -84,6 +93,22 @@ export default {
           useUpdataTreeData(item, state)
         }
       })
+    }
+    // 获得当前节点的父节点
+    const useParentTreeData = (parentId) => {
+      let parentNode = null
+      if (parentId) {
+        for (let i = 0; i < treeNode.value.length; i++) {
+          const item = treeNode.value[i]
+          if (item.id === parentId) {
+            parentNode = item
+            break
+          }
+        }
+      }
+      return {
+        parentNode
+      }
     }
     // 更新expandedKeys
     const useUpdataExpanded = () => {
@@ -94,12 +119,12 @@ export default {
      * 展开事件
      */
     const handlerExpand = (item) => {
-      console.timeEnd(new Date().getTime())
+      console.timeEnd('展开事件', new Date().getTime())
       item.expanded = !item.expanded
       useUpdataTreeData(item, item.expanded)
       useUpdataExpanded()
       useRenderTreeItem()
-      console.timeEnd(new Date().getTime())
+      console.timeEnd('展开事件', new Date().getTime())
     }
     /**
      * 滚动事件
@@ -108,6 +133,73 @@ export default {
       index = Math.ceil(root.value.scrollTop / 26)
       paddingTop.value = index * 26
       useRenderTreeItem()
+    }
+    // 更新treeNode children的checked状态
+    const useChildrenCheckedKeys = (target, checked) => {
+      checkedParents.delete(target.id)
+      target?.children?.forEach(item => {
+        if (checked) {
+          checkedKeys.add(item.id)
+        } else {
+          checkedKeys.delete(item.id)
+        }
+        if (item.children) {
+          useChildrenCheckedKeys(item, checked)
+        }
+      })
+    }
+    // 更新treeNode parent的checked状态
+    const useParentCheckedKeys = (target, checked) => {
+      const { parentNode } = useParentTreeData(target.parentPath[target.parentPath.length - 1])
+      if (parentNode) {
+        const childrenChecks = parentNode.children.filter(item => checkedKeys.has(item.id))
+        if (checked) {
+          checkedParents.add(parentNode.id)
+        } else {
+
+        }
+        if (childrenChecks.length) {
+          if (childrenChecks.length === parentNode.children.length) {
+            checkedKeys.add(parentNode.id)
+          } else {
+            checkedKeys.delete(parentNode.id)
+            checkedParents.add(parentNode.id)
+          }
+        } else {
+          if (checked) {
+            checkedParents.add(parentNode.id)
+          } else {
+            checkedParents.delete(parentNode.id)
+          }
+        }
+        console.log('parentNode', parentNode)
+        useParentCheckedKeys(parentNode, checked)
+      }
+    }
+    /**
+     * 复选框事件
+     * 1.保存对应的id
+     * 2.保存parentsPath
+     */
+    const handlerCheckBox = (checked, target) => {
+      if (checked) {
+        checkedKeys.add(target.id)
+        target.parentPath.forEach(item => checkedParents.add(item))
+      } else {
+        checkedKeys.delete(target.id)
+      }
+      useParentCheckedKeys(target, checked)
+      useChildrenCheckedKeys(target, checked)
+      // 刷新
+      useRenderTreeItem()
+    }
+    // 复选框的状态
+    const useCheckState = (target) => {
+      const { id } = target
+
+      return {
+        indeterminate: checkedParents.has(id), checked: checkedKeys.has(id)
+      }
     }
     /**
      * tree初始化
@@ -139,9 +231,11 @@ export default {
       treeNode,
       renderNode,
       containerHight,
+      useCheckState,
 
       handlerExpand,
-      handlerScroll
+      handlerScroll,
+      handlerCheckBox
     }
   },
 
@@ -150,17 +244,24 @@ export default {
   },
 
   render () {
-    const { paddingTop, containerHight, renderNode, handlerExpand, handlerScroll } = this
-
+    const { paddingTop, containerHight, renderNode, showCheckbox, useCheckState, handlerExpand, handlerScroll, handlerCheckBox } = this
+    function decorateTreeCheckbox (showCheckbox, item) {
+      const { indeterminate, checked } = useCheckState(item)
+      return showCheckbox ? <BaseCheckBox indeterminate={indeterminate} checked={checked} onChange={(checked) => handlerCheckBox(checked, item)} /> : null
+    }
+    function decorateTreeItem (item) {
+      return (
+        <div class="ba-tree-item" style={{ paddingLeft: `${item.level * 18}px` }}>
+          { item.children.length > 0 ? <Icon type={item.expanded ? 'CaretDownFilled' : 'CaretRightFilled'} onClick={() => handlerExpand(item)}/> : null}
+          {decorateTreeCheckbox(showCheckbox, item)}
+          {item.name}
+        </div>)
+    }
     return (
       <div ref='root' class="ba-tree" onScroll={handlerScroll}>
         <div style={{ height: `${containerHight}px`, paddingTop: `${paddingTop}px` }}>
           {renderNode.map((item) => {
-            return (
-              <div class="ba-tree-item" style={{ paddingLeft: `${item.level * 18}px` }}>
-                { item.children.length > 0 ? <Icon type={item.expanded ? 'ChevronDown' : 'ChevronRight'} onClick={() => handlerExpand(item)}/> : null}
-                {item.name}
-              </div>)
+            return decorateTreeItem(item)
           })}
         </div>
       </div>
@@ -174,6 +275,9 @@ export default {
   overflow-y: auto;
   .ba-tree-item{
     height: 26px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
 }
 </style>

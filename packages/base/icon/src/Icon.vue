@@ -8,7 +8,10 @@
 </template>
 
 <script>
-import { ArrowDownOutlined, ArrowLeftOutlined, ArrowRightOutlined, ArrowUpOutlined, ApartmentOutlined, CheckOutlined, CloseOutlined } from "@vicons/antd"
+import {
+  ArrowDownOutlined, ArrowLeftOutlined, ArrowRightOutlined, ArrowUpOutlined, ApartmentOutlined, CheckOutlined, CloseOutlined,
+  CaretDownFilled, CaretDownOutlined, CaretLeftFilled, CaretLeftOutlined, CaretRightFilled, CaretRightOutlined, CaretUpFilled, CaretUpOutlined, MinusOutlined, PlusOutlined
+} from "@vicons/antd"
 
 // 你可以直接使用渲染为 SVG 的组件
 // 或者把它包裹在 @vicons/utils 提供的 Icon 组件中
@@ -23,7 +26,17 @@ export default {
     ArrowUpOutlined,
     ApartmentOutlined,
     CheckOutlined,
-    CloseOutlined
+    CloseOutlined,
+    CaretDownFilled,
+    CaretDownOutlined,
+    CaretLeftFilled,
+    CaretLeftOutlined,
+    CaretRightFilled,
+    CaretRightOutlined,
+    CaretUpFilled,
+    CaretUpOutlined,
+    MinusOutlined,
+    PlusOutlined
   },
   props: {
     type: {

@@ -16,7 +16,7 @@ const useModel = (props) => {
     get () {
       return isGroup.value
         ? store.value
-        : props.modelValue ?? selfModel.value
+        : props.checked ?? selfModel.value
     },
     set (val) {
       if (isGroup.value && Array.isArray(val)) {
@@ -89,6 +89,7 @@ const useEvent = (props) => {
   // const { isGroup, checkboxGroup } = useCheckboxGroup()
   function handleChange (e) {
     const { checked, value } = e.target
+    console.log(checked, value)
     emit('change', checked, value)
     // emit('update:modelValue', e.target.checked, e.target.value)
   }
