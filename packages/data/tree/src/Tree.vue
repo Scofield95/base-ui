@@ -119,7 +119,7 @@ export default {
      * 展开事件
      */
     const handlerExpand = (item) => {
-      console.timeEnd('展开事件', new Date().getTime())
+      console.time('展开事件', new Date().getTime())
       item.expanded = !item.expanded
       useUpdataTreeData(item, item.expanded)
       useUpdataExpanded()
@@ -153,11 +153,6 @@ export default {
       const { parentNode } = useParentTreeData(target.parentPath[target.parentPath.length - 1])
       if (parentNode) {
         const childrenChecks = parentNode.children.filter(item => checkedKeys.has(item.id))
-        if (checked) {
-          checkedParents.add(parentNode.id)
-        } else {
-
-        }
         if (childrenChecks.length) {
           if (childrenChecks.length === parentNode.children.length) {
             checkedKeys.add(parentNode.id)
@@ -166,13 +161,13 @@ export default {
             checkedParents.add(parentNode.id)
           }
         } else {
-          if (checked) {
+          const inChecks = parentNode.children.filter(item => checkedParents.has(item.id))
+          if (checked || inChecks.length) {
             checkedParents.add(parentNode.id)
           } else {
             checkedParents.delete(parentNode.id)
           }
         }
-        console.log('parentNode', parentNode)
         useParentCheckedKeys(parentNode, checked)
       }
     }
@@ -182,6 +177,7 @@ export default {
      * 2.保存parentsPath
      */
     const handlerCheckBox = (checked, target) => {
+      console.time('复选框事件', new Date().getTime())
       if (checked) {
         checkedKeys.add(target.id)
         target.parentPath.forEach(item => checkedParents.add(item))
@@ -190,8 +186,11 @@ export default {
       }
       useParentCheckedKeys(target, checked)
       useChildrenCheckedKeys(target, checked)
+      // console.log('checkedKeys', checkedKeys)
+      // console.log('checkedParents', checkedParents)
       // 刷新
       useRenderTreeItem()
+      console.timeEnd('复选框事件', new Date().getTime())
     }
     // 复选框的状态
     const useCheckState = (target) => {
@@ -252,9 +251,9 @@ export default {
     function decorateTreeItem (item) {
       return (
         <div class="ba-tree-item" style={{ paddingLeft: `${item.level * 18}px` }}>
-          { item.children.length > 0 ? <Icon type={item.expanded ? 'CaretDownFilled' : 'CaretRightFilled'} onClick={() => handlerExpand(item)}/> : null}
+          { item.children.length > 0 ? <Icon type={item.expanded ? 'CaretDownFilled' : 'CaretRightFilled'} onClick={() => handlerExpand(item)}/> : <i class="ba-icon-placeholder"></i>}
           {decorateTreeCheckbox(showCheckbox, item)}
-          {item.name}
+          <span class="ba-tree-label">{item.name}</span>
         </div>)
     }
     return (
@@ -278,6 +277,13 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+  }
+  .ba-icon-placeholder{
+    font-size: 16px;
+    width: 16px;
+  }
+  .ba-tree-label{
+    padding-left: 8px;
   }
 }
 </style>

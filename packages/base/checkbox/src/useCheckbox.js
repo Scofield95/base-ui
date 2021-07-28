@@ -89,7 +89,6 @@ const useEvent = (props) => {
   // const { isGroup, checkboxGroup } = useCheckboxGroup()
   function handleChange (e) {
     const { checked, value } = e.target
-    console.log(checked, value)
     emit('change', checked, value)
     // emit('update:modelValue', e.target.checked, e.target.value)
   }
