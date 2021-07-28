@@ -1,9 +1,10 @@
 import components from './index.ts'
-import '@/style/reste.less'
+import '@/style/reset.less'
 function install (app, opt) {
+  // console.log(components)
   components.forEach((component) => {
-    const name = opt?.tag ? `${opt.tag}-${component.name}` : `Base${component.name}`
-    component.name = name
+    // const name = opt?.tag ? `${opt.tag}-${component.name}` : `Base${component.name}`
+    // component.name = name
     app.component(name, component)
   })
 }

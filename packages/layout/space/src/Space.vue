@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'Space',
+  name: 'BaseSpace',
 
   render () {
     const { $slots } = this

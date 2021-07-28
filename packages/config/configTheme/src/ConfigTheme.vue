@@ -7,7 +7,7 @@ import { provide, reactive, ref } from 'vue'
 
 // Pixel unit
 export default {
-  name: 'ConfigTheme',
+  name: 'BaseConfigTheme',
 
   props: {
     baseColor: {

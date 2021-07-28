@@ -10,7 +10,7 @@ const sizeMap = {
   largeBig: 64
 }
 export default {
-  name: 'Button',
+  name: 'BaseButton',
 
   props: {
     type: {

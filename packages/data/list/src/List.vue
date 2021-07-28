@@ -2,7 +2,7 @@
 import { ref, toRefs, onMounted, defineComponent } from 'vue'
 
 export default defineComponent({
-
+  name: 'BaseList',
   props: {
     data: {
       type: Array,

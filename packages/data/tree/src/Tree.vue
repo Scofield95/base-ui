@@ -17,6 +17,7 @@ function useFlatArray (array) {
   return flat
 }
 export default {
+  name: 'BaseTree',
   components: {
     Icon,
     BaseCheckBox
