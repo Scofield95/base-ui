@@ -1,5 +1,5 @@
 <template>
-  <slot></slot>
+  <slot />
 </template>
 
 <script>
@@ -7,10 +7,10 @@ import { provide, reactive, ref } from 'vue'
 
 // Pixel unit
 export default {
-  name: 'configTheme',
+  name: 'ConfigTheme',
 
   props: {
-    BaseColor: {
+    baseColor: {
       type: Object,
       default: () => ({
         default: '#fff',
@@ -25,10 +25,10 @@ export default {
 
   setup (props) {
     const pixelUnit = ref('px')
-    const BaseColor = reactive(props.BaseColor)
+    const baseColor = reactive(props.baseColor)
 
     provide('pixelUnit', pixelUnit)
-    provide('BaseColor', BaseColor)
+    provide('baseColor', baseColor)
   }
 }
 </script>

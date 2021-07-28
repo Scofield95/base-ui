@@ -1,10 +1,11 @@
 <script>
 export default {
-  name: 'card',
+  name: 'Card',
 
   props: {
     title: {
-      type: [String, undefined]
+      type: [String, undefined],
+      default: undefined
     }
   },
 

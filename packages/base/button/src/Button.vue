@@ -35,7 +35,10 @@ export default {
       type: String,
       default: 'default'
     },
-    icon: String,
+    icon: {
+      type: String,
+      default: ''
+    },
     block: {
       type: Boolean,
       default: false
@@ -47,7 +50,7 @@ export default {
   },
 
   setup (props) {
-    const BaseColor = inject('BaseColor')
+    const baseColor = inject('baseColor')
     // 计算组件的大小
     function getSize (props) {
       return `${props.size ? sizeMap[props.size] : sizeMap.default}px`
@@ -57,13 +60,13 @@ export default {
       buttonStyle: {
         '--size': getSize(props),
 
-        '--background': props.dashed ? '#fff' : useButtonBackground(props, BaseColor),
-        '--background-hover': props.dashed ? '#fff' : useButtonBackgroundHover(props, BaseColor),
-        '--background-active': props.dashed ? '#fff' : useButtonBackgroundActive(props, BaseColor),
-        '--font-color': props.dashed ? BaseColor[props.type === 'default' ? 'primary' : props.type] : useButtonFontColor(props, BaseColor),
+        '--background': props.dashed ? '#fff' : useButtonBackground(props, baseColor),
+        '--background-hover': props.dashed ? '#fff' : useButtonBackgroundHover(props, baseColor),
+        '--background-active': props.dashed ? '#fff' : useButtonBackgroundActive(props, baseColor),
+        '--font-color': props.dashed ? baseColor[props.type === 'default' ? 'primary' : props.type] : useButtonFontColor(props, baseColor),
 
         '--borderstyle': props.dashed ? 'dashed' : 'solid',
-        '--borderColor': props.type ? BaseColor[props.type === 'default' ? 'primary' : props.type] : '#dcdfe6'
+        '--borderColor': props.type ? baseColor[props.type === 'default' ? 'primary' : props.type] : '#dcdfe6'
       }
     }
   },

@@ -8,7 +8,8 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     '@vue/standard',
-    '@vue/typescript'
+    '@vue/typescript',
+    'plugin:vue/vue3-recommended',
   ],
 
   parserOptions: {

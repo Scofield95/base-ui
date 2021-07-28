@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'card-panel',
+  name: 'CardPanel',
   props: {
     radius: {
       type: Boolean,
@@ -8,7 +8,8 @@ export default {
     },
 
     title: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   render () {

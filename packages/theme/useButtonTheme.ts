@@ -6,7 +6,7 @@ interface props {
   color: string,
 }
 
-interface BaseColor {
+interface baseColor {
   primary: string,
   success: string,
   info: string,
@@ -17,25 +17,25 @@ interface BaseColor {
 }
 
 // 计算组件的background
-export function useButtonBackground (props: props, BaseColor: BaseColor) {
+export function useButtonBackground (props: props, baseColor: baseColor) {
   if (props.type) {
-    return BaseColor[(props.type as string | number)]
+    return baseColor[(props.type as string | number)]
   } else if (props.color) {
     return '#ddd'
   }
   return '#fff'
 }
 
-export function useButtonBackgroundHover (props: props, BaseColor: BaseColor) {
-  return Color(useButtonBackground(props, BaseColor)).lighten(0.1).string()
+export function useButtonBackgroundHover (props: props, baseColor: baseColor) {
+  return Color(useButtonBackground(props, baseColor)).lighten(0.1).string()
 }
 
-export function useButtonBackgroundActive (props: props, BaseColor: BaseColor) {
-  return Color(useButtonBackground(props, BaseColor)).darken(0.1).hex()
+export function useButtonBackgroundActive (props: props, baseColor: baseColor) {
+  return Color(useButtonBackground(props, baseColor)).darken(0.1).hex()
 }
 
 // 计算组件的字体颜色
-export function useButtonFontColor (props: props, BaseColor: BaseColor) {
+export function useButtonFontColor (props: props, baseColor: baseColor) {
   if (props.type !== 'default') {
     return '#fff'
   }

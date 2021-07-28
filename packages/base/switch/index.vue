@@ -1,14 +1,17 @@
 <template>
   <div class="g-switch-btn">
-    <div :class="['u-switch-btn']" :style="{ '--switchWidth': config[size] }">
+    <div
+      :class="['u-switch-btn']"
+      :style="{ '--switchWidth': config[size] }"
+    >
       <input
         :id="id"
         type="checkbox"
         :checked="$attrs.checked"
         class="switch"
         @change="changeValue"
-      />
-      <label :for="id"></label>
+      >
+      <label :for="id" />
     </div>
     <span class="s-feng"> {{ title }}</span>
   </div>
@@ -24,19 +27,23 @@ const config = {
 
 const color = {}
 export default {
-  name: 'switch',
+  name: 'Switch',
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
 
   props: {
     size: {
       type: String, // [default, small, large]
       default: 'default'
     },
-    title: String
+    title: {
+      type: String,
+      default: ''
+    }
   },
-  model: {
-    prop: 'checked',
-    event: 'change'
-  },
+  emits: ['change'],
 
   data () {
     return {

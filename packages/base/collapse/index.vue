@@ -1,17 +1,35 @@
 <template>
-    <div class="u-base-collapse">
-        <div v-if="headerOpt" class="u-base-collapse-header">
-            <div v-for="(item, index) in headerOpt" :key="index" :style="{ width: item.width }">{{ item }}</div>
-        </div>
-        <slot></slot>
+  <div class="u-base-collapse">
+    <div
+      v-if="headerOpt"
+      class="u-base-collapse-header"
+    >
+      <div
+        v-for="(item, index) in headerOpt"
+        :key="index"
+        :style="{ width: item.width }"
+      >
+        {{ item }}
+      </div>
     </div>
+    <slot />
+  </div>
 </template>
 <script>
 export default {
-  name: 'collapse',
+  name: 'Collapse',
+
+  provide () {
+    return {
+      collapse: this
+    }
+  },
 
   props: {
-    headerOpt: Array,
+    headerOpt: {
+      type: Array,
+      default: () => []
+    },
     accordion: Boolean,
     value: {
       type: [Array, String, Number],
@@ -20,16 +38,11 @@ export default {
       }
     }
   },
+  emits: ['change', 'input'],
 
   data () {
     return {
       activeNames: [].concat(this.value)
-    }
-  },
-
-  provide () {
-    return {
-      collapse: this
     }
   },
 
@@ -39,6 +52,9 @@ export default {
     }
   },
 
+  created () {
+    // this.$on('item-click', this.handleItemClick);
+  },
   methods: {
     setActiveNames (activeNames) {
       // eslint-disable-next-line no-param-reassign
@@ -67,10 +83,6 @@ export default {
         this.setActiveNames(activeNames)
       }
     }
-  },
-
-  created () {
-    // this.$on('item-click', this.handleItemClick);
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'collapse-item',
+  name: 'CollapseItem',
 
   props: {
     headerOpt: {
@@ -10,14 +10,27 @@ export default {
       }
     },
     contentOpt: {
-      type: Object
+      type: Object,
+      default: () => {}
     },
 
     select: Boolean,
     layer: Boolean,
 
-    name: String,
-    more: String
+    name: {
+      type: String,
+      default: ''
+    },
+    more: {
+      type: String,
+      default: ''
+    }
+  },
+  emits: ['openCollapse'],
+  data () {
+    return {
+      currentItem: ''
+    }
   },
 
   computed: {
@@ -31,12 +44,6 @@ export default {
       this.currentItem = val === this.currentItem ? this.currentItem : '-1'
     }
   },
-  data () {
-    return {
-      currentItem: ''
-    }
-  },
-
   methods: {
     openCollapse (name) {
       console.log(name)

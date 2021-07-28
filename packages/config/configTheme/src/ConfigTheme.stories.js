@@ -5,7 +5,7 @@ export default {
   title: '配置组件/Theme 配置',
   component: BaseConfigTheme,
   argTypes: {
-    BaseColor: {
+    baseColor: {
     //   values: [
     //     { name: 'red', value: '#f00' },
     //     { name: 'green', value: '#0f0' }
@@ -27,7 +27,7 @@ const Template = (args) => ({
 export const Theme = Template.bind({})
 
 Theme.args = {
-  BaseColor: {
+  baseColor: {
     primary: '#409eff',
     success: '#67c23a',
     info: '#909399',

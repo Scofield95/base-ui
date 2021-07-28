@@ -16,6 +16,9 @@ function useFlatArray (array) {
   return flat
 }
 export default {
+  components: {
+    Icon
+  },
   props: {
     data: {
       type: Array,
@@ -39,9 +42,6 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  components: {
-    Icon
   },
   setup (props) {
     const { data, defaultExpandAll, defaultExpandedKeys } = toRefs(props)

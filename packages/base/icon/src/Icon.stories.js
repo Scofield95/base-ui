@@ -7,7 +7,7 @@ export default {
   component: BaseIcon,
   argTypes: {
     type: {
-      control: { type: 'select', options: ['ChevronDown', 'ChevronRight', 'ChevronLeft', 'ChevronUp', 'EllipsisH', 'EllipsisV', 'LocationArrow'] },
+      control: { type: 'select', options: ['ArrowDownOutlined', 'ArrowLeftOutlined', 'ArrowRightOutlined', 'ArrowUpOutlined', 'ApartmentOutlined', 'CheckOutlined', 'CloseOutlined'] },
       description: '类型'
     }
   }
@@ -21,18 +21,18 @@ const Template = (args) => ({
   template: `
               <base-icon v-bind="args"></base-icon>
               <BaseSpace>
-                <base-icon type="ChevronDown"></base-icon>
-                <base-icon type="ChevronRight"></base-icon>
-                <base-icon type="ChevronLeft"></base-icon>
-                <base-icon type="ChevronUp"></base-icon>
-                <base-icon type="EllipsisH"></base-icon>
-                <base-icon type="EllipsisV"></base-icon>
-                <base-icon type="LocationArrow"></base-icon>
+                <base-icon type="ArrowDownOutlined"></base-icon>
+                <base-icon type="ArrowLeftOutlined"></base-icon>
+                <base-icon type="ArrowRightOutlined"></base-icon>
+                <base-icon type="ArrowUpOutlined"></base-icon>
+                <base-icon type="ApartmentOutlined"></base-icon>
+                <base-icon type="CheckOutlined"></base-icon>
+                <base-icon type="CloseOutlined"></base-icon>
             </BaseSpace>`
 })
 
 export const Icon = Template.bind({})
 
 Icon.args = {
-  type: 'ChevronDown'
+  type: 'ArrowDownOutlined'
 }
