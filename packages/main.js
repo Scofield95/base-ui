@@ -5,7 +5,7 @@ function install (app, opt) {
   components.forEach((component) => {
     // const name = opt?.tag ? `${opt.tag}-${component.name}` : `Base${component.name}`
     // component.name = name
-    app.component(name, component)
+    app.component(component.name, component)
   })
 }
 
