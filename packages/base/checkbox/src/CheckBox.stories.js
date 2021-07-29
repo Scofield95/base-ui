@@ -1,11 +1,12 @@
 import BaseConfigTheme from '@/config/configTheme/src/ConfigTheme.vue'
-import BaseCheckBox from './CheckBox.vue'
+import BaseCheckbox from './Checkbox.vue'
+import BaseCheckboxGroup from './CheckboxGroup.vue'
 
 import '@/style/reset.less'
 
 export default {
   title: '基础组件/复选框',
-  component: BaseCheckBox,
+  component: BaseCheckbox,
   argTypes: {
     type: {
       control: {
@@ -17,31 +18,44 @@ export default {
 }
 
 const Template = (args) => ({
-  components: { BaseCheckBox, BaseConfigTheme },
+  components: { BaseCheckbox, BaseConfigTheme },
   data () {
     return {
-      checked: false
+      checked: true
     }
   },
   setup () {
     return { args }
   },
+  methods: {
+    change (val) {
+      console.log(val)
+    }
+  },
   template: `<BaseConfigTheme>
-                <BaseCheckBox v-bind="args" v-model="checked">复选框</BaseCheckBox>
+                <BaseCheckbox v-bind="args"  v-model="checked">复选框</BaseCheckbox>
+                <br />
+                <BaseCheckbox @change="change">复选框nomode</BaseCheckbox>
             </BaseConfigTheme>`
 })
 
 export const CheckBox = Template.bind({})
 
 CheckBox.args = {
-  type: 'primary'
+  type: 'primary',
+  checked: false,
+  label: '',
+  indeterminate: false
 }
 
 const TemplateGroup = (args) => ({
-  components: { BaseCheckBox, BaseConfigTheme },
+  components: { BaseCheckbox, BaseCheckboxGroup, BaseConfigTheme },
   data () {
     return {
-      checked: false
+      checkAll: false,
+      checkedCities: ['上海', '北京'],
+      cities: ['上海', '北京', '广州', '深圳'],
+      isIndeterminate: true
     }
   },
   setup () {
@@ -54,15 +68,28 @@ const TemplateGroup = (args) => ({
       }
     }
   },
+  methods: {
+    handleCheckAllChange (val) {
+      this.checkedCities = val ? this.cities : []
+      this.isIndeterminate = false
+    },
+    handleCheckedCitiesChange (value) {
+      const checkedCount = value.length
+      this.checkAll = checkedCount === this.cities.length
+      this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length
+    }
+  },
   template: `<BaseConfigTheme>
-                <BaseCheckBoxGroup>
-                  <BaseCheckBox v-bind="args">复选框组</BaseCheckBox>
-                </BaseCheckBoxGroup>
+                <BaseCheckbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</BaseCheckbox>
+                <BaseCheckboxGroup v-model="checkedCities" @change="handleCheckedCitiesChange">
+                  <BaseCheckbox v-for="item in cities" :key="item" :value="item">{{item}}</BaseCheckbox>
+                </BaseCheckboxGroup>
               </BaseConfigTheme>`
 })
 
-export const CheckBoxGroup = TemplateGroup.bind({})
+export const CheckboxGroup = TemplateGroup.bind({})
 
-CheckBoxGroup.args = {
+CheckboxGroup.title = '基础组件/复选框组'
+CheckboxGroup.args = {
   type: 'primary'
 }

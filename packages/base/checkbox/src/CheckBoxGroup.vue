@@ -6,6 +6,7 @@
 <script>
 import { defineComponent, provide, computed, nextTick } from 'vue'
 export default defineComponent({
+  name: 'BaseCheckboxGroup',
   props: {
     modelValue: {
       type: [Object, Boolean, Array],

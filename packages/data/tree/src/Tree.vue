@@ -1,7 +1,7 @@
 <script>
 import { ref, toRefs } from 'vue'
 import Icon from '@/base/icon/src/Icon.vue'
-import BaseCheckBox from '@/base/checkbox/src/CheckBox.vue'
+import BaseCheckbox from '@/base/checkbox/src/Checkbox.vue'
 
 function useFlatArray (array) {
   const flat = []
@@ -20,7 +20,7 @@ export default {
   name: 'BaseTree',
   components: {
     Icon,
-    BaseCheckBox
+    BaseCheckbox
   },
   props: {
     data: {
@@ -247,7 +247,7 @@ export default {
     const { paddingTop, containerHight, renderNode, showCheckbox, useCheckState, handlerExpand, handlerScroll, handlerCheckBox } = this
     function decorateTreeCheckbox (showCheckbox, item) {
       const { indeterminate, checked } = useCheckState(item)
-      return showCheckbox ? <BaseCheckBox indeterminate={indeterminate} checked={checked} onChange={(checked) => handlerCheckBox(checked, item)} /> : null
+      return showCheckbox ? <BaseCheckbox indeterminate={indeterminate} modelValue={checked} onChange={(checked) => handlerCheckBox(checked, item)} /> : null
     }
     function decorateTreeItem (item) {
       return (

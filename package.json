@@ -1,6 +1,6 @@
 {
   "name": "base-x-ui",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "scripts": {
     "build": "vue-cli-service build --target lib --name base-x-ui --dest dist ./packages/main.js",
     "lint": "vue-cli-service lint ./packages ./ --ext .vue,.js,.ts ",

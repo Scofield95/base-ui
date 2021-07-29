@@ -16,7 +16,7 @@ const useModel = (props) => {
     get () {
       return isGroup.value
         ? store.value
-        : props.checked ?? selfModel.value
+        : props.modelValue ?? selfModel.value
     },
     set (val) {
       if (isGroup.value && Array.isArray(val)) {

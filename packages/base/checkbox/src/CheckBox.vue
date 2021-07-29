@@ -35,6 +35,7 @@ import { useCheckbox } from './useCheckbox'
 import BaseIcon, {} from '@/base/icon/src/Icon.vue'
 
 export default defineComponent({
+  name: 'BaseCheckbox',
   components: {
     BaseIcon
   },
@@ -50,10 +51,6 @@ export default defineComponent({
     value: {
       type: [String, Boolean],
       default: ''
-    },
-    checked: {
-      type: Boolean,
-      default: false
     },
     type: {
       type: String,
