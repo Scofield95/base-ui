@@ -6,7 +6,7 @@ import CheckboxGroup from '@/base/checkbox/src/CheckboxGroup.vue'
 // import CardPanel from '@/base/cardPanel/index.vue'
 // import Collapse from '@/base/collapse/index.vue'
 // import CollapseItem from '@/base/collapseItem/index.vue'
-// import Switch from '@/base/switch/index.vue'
+import Switch from '@/base/switch/src/Switch.vue'
 
 import Space from '@/layout/space/src/Space.vue'
 
@@ -19,6 +19,7 @@ export default [
   Button,
   Checkbox,
   CheckboxGroup,
+  Switch,
 
   Tree,
   List,
