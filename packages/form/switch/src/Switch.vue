@@ -3,7 +3,8 @@
     :class="['base-switch', isChecked ? 'is-checked' : '']"
     :style="baseStyle"
   >
-    <span :class="['base-switch_label', isChecked ? '' : 'is-active']"> {{ inactiveText }}</span>
+    <span :class="['base-switch_label', isChecked ? '' : 'is-active']">
+      {{ inactiveText }}</span>
     <div :class="['base-switch_wrap']">
       <input
         type="checkbox"
@@ -13,7 +14,8 @@
         @input="handleInput"
       >
     </div>
-    <span :class="['base-switch_label', isChecked ? 'is-active' : '']"> {{ activeText }}</span>
+    <span :class="['base-switch_label', isChecked ? 'is-active' : '']">
+      {{ activeText }}</span>
   </label>
 </template>
 
@@ -67,7 +69,8 @@ export default {
       baseStyle: {
         "--switch-width": `${props.width}px`,
         "--active-color": props.activeColor,
-        "--inactive-color": props.inactiveColor
+        "--inactive-color": props.inactiveColor,
+        "--offset": "2px"
       },
       handleChange,
       handleInput
@@ -83,10 +86,20 @@ export default {
   align-items: center;
   &.is-checked {
     .base-switch_wrap:after {
-      transform: translateX(calc(100% + 4px));
+      left: calc(100% - var(--switch-width) / 2 + var(--offset));
     }
     .base-switch_wrap:before {
       background-color: var(--active-color);
+    }
+    &:active {
+      .base-switch_wrap:after {
+        left: calc(100% - var(--switch-width) / 2 - var(--offset));
+      }
+    }
+  }
+  &:active {
+    .base-switch_wrap:after {
+      width: calc(var(--switch-width) / 2);
     }
   }
 }
@@ -112,14 +125,13 @@ export default {
   &::after {
     content: "";
     position: absolute;
-    top: 2px;
-    left: 2px;
+    top: var(--offset);
+    left: var(--offset);
     width: calc(var(--switch-width) / 2 - 4px);
     height: calc(var(--switch-width) / 2 - 4px);
     border-radius: calc(var(--switch-width) / 2);
     background-color: white;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.08);
-    transform: translateX(0);
     transition: all 0.3s ease;
   }
 }

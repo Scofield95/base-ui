@@ -5,7 +5,7 @@ import BaseCheckboxGroup from './CheckboxGroup.vue'
 import '@/style/reset.less'
 
 export default {
-  title: '基础组件/复选框',
+  title: '表单组件/复选框',
   component: BaseCheckbox,
   argTypes: {
     type: {

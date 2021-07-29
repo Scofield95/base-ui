@@ -1,7 +1,7 @@
 <script>
 import { ref, toRefs } from 'vue'
 import Icon from '@/base/icon/src/Icon.vue'
-import BaseCheckbox from '@/base/checkbox/src/Checkbox.vue'
+import BaseCheckbox from '@/form/checkbox/src/Checkbox.vue'
 
 function useFlatArray (array) {
   const flat = []

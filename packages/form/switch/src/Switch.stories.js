@@ -3,7 +3,7 @@ import BaseSwitch from './Switch.vue'
 import '@/style/reset.less'
 
 export default {
-  title: '基础组件/ switch开关',
+  title: '表单组件/ switch开关',
   component: BaseSwitch,
   argTypes: {}
 }
