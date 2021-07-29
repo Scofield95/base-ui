@@ -54,6 +54,7 @@ const TemplateGroup = (args) => ({
     return {
       checkAll: false,
       checkedCities: ['上海', '北京'],
+      checkedCities2: [],
       cities: ['上海', '北京', '广州', '深圳'],
       isIndeterminate: true
     }
@@ -82,6 +83,9 @@ const TemplateGroup = (args) => ({
   template: `<BaseConfigTheme>
                 <BaseCheckbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</BaseCheckbox>
                 <BaseCheckboxGroup v-model="checkedCities" @change="handleCheckedCitiesChange">
+                  <BaseCheckbox v-for="item in cities" :key="item" :value="item">{{item}}</BaseCheckbox>
+                </BaseCheckboxGroup>
+                <BaseCheckboxGroup v-model="checkedCities2">
                   <BaseCheckbox v-for="item in cities" :key="item" :value="item">{{item}}</BaseCheckbox>
                 </BaseCheckboxGroup>
               </BaseConfigTheme>`

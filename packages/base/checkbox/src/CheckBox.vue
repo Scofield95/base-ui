@@ -96,7 +96,7 @@ export default defineComponent({
     visibility: hidden;
   }
   .base-checkbox_label{
-    padding-left: 12px;
+    padding-left: 6px;
   }
 }
 </style>
