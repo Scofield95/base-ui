@@ -4,6 +4,13 @@ import '@/style/reset.less'
 
 export default {
   title: '基础组件/Button 按钮',
+  parameters: {
+    docs: {
+      description: {
+        component: '配置颜色大小的'
+      }
+    }
+  },
   component: BaseButton,
   argTypes: {
     size: {
@@ -17,10 +24,18 @@ export default {
       },
       description: '类型。优先级高于color',
       table: {
+        category: '类型',
         type: {
           summary: '详情',
-          detail: '按钮的 type 分别为 default, primary, success, info, warning, danger。'
+          detail: `
+                  default
+                  primary
+                  success 
+                  info
+                  warning
+                  danger`
         }
+        // subcategory: 'Button'
       }
     },
     color: {
@@ -53,4 +68,13 @@ export const Button = Template.bind({})
 
 Button.args = {
   type: 'primary'
+}
+
+Button.parameters = {
+  backgrounds: {
+    values: [
+      { name: 'red', value: '#f00' },
+      { name: 'green', value: '#0f0' }
+    ]
+  }
 }
