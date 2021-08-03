@@ -1,5 +1,6 @@
 <script>
 import { defineComponent } from 'vue'
+import { useRowsAndCols } from './useTable.js'
 
 export default defineComponent({
   name: 'BaseTable',
@@ -13,80 +14,17 @@ export default defineComponent({
       default: () => []
     }
   },
-  setup () {
-
+  setup (props) {
+    const { rows, cols } = useRowsAndCols(props.columns)
+    return {
+      rows, cols
+    }
   },
   render () {
-    const { columns, dataSource, $slots } = this
+    const { rows, cols, dataSource, $slots } = this
     // console.log($slots.default)
     // $slots[scopedSlots.customRender]()
     // 获得row  col
-    function getRowsAndCols (columns) {
-      const cols = []
-      const rows = []
-      let maxDepth = -1
-
-      function ensureMaxDepth (columns, currentDepth) {
-        if (currentDepth > maxDepth) {
-          rows[currentDepth] = []
-          maxDepth = currentDepth
-        }
-        for (const column of columns) {
-          if ('children' in column) {
-            ensureMaxDepth(column.children, currentDepth + 1)
-          } else {
-            cols.push({
-              key: column.key,
-              // style: utils_1.createCustomWidthStyle(column),
-              column
-            })
-          }
-        }
-      }
-      ensureMaxDepth(columns, 0)
-      function getColSpan (items) {
-        let colSpan = 0
-        function getColSpanValue (items) {
-          if (items) {
-            colSpan += items.filter(i => !i.children).length
-            const children = items.filter(i => i.children)
-            children.forEach(i => {
-              getColSpanValue(i.children)
-            })
-          } else {
-            colSpan = 1
-          }
-        }
-        getColSpanValue(items)
-        return colSpan
-      }
-      function ensureColLayout (columns, currentDepth) {
-        columns.forEach((column, index) => {
-          if ('children' in column) {
-            const rowItem = {
-              column,
-              colSpan: getColSpan(column.children),
-              rowSpan: 1
-            }
-            rows[currentDepth].push(rowItem)
-            ensureColLayout(column.children, currentDepth + 1)
-          } else {
-            const rowItem = {
-              column,
-              colSpan: 1,
-              rowSpan: maxDepth - currentDepth + 1
-            }
-            rows[currentDepth].push(rowItem)
-          }
-        })
-      }
-      ensureColLayout(columns, 0)
-      console.log(columns, cols, rows)
-      return {
-        cols, rows
-      }
-    }
-    const { rows, cols } = getRowsAndCols(columns)
     // 装饰列
     const decorateCol = () => {
       return cols.map(item => <col></col>)
@@ -146,6 +84,7 @@ export default defineComponent({
 <style lang="less" scoped>
 .base-table_wrap{
   .base-table_body{
+    width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
   }
