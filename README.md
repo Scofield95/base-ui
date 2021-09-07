@@ -11,6 +11,8 @@
 
     vue.use(BaseUI)
 
+# 组件结构
+
 
 # CSS书写顺序：
 

@@ -1,6 +1,7 @@
-import components from './index.ts'
+import { App } from 'vue'
+import components from './index'
 import '@/style/reset.less'
-function install (app, opt) {
+function install (app: App) {
   // console.log(components)
   components.forEach((component) => {
     // const name = opt?.tag ? `${opt.tag}-${component.name}` : `Base${component.name}`
@@ -8,6 +9,8 @@ function install (app, opt) {
     app.component(component.name, component)
   })
 }
+
+install.installed = undefined
 
 export default {
   install
