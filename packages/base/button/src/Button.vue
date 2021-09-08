@@ -60,7 +60,6 @@ export default {
     function getSize (props) {
       return `${props.size ? sizeMap[props.size] : sizeMap.default}px`
     }
-    console.log(props.type)
     return {
       buttonStyle: {
         '--size': getSize(props),

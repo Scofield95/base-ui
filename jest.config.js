@@ -3,7 +3,9 @@ module.exports = {
   transform: {
     '^.+\\.vue$': 'vue-jest'
   },
-  resolver: '<rootDir>/packages/**/**/*.(vue|ts|js)',
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/packages/$1"
+  },
   testMatch: [
     // '<rootDir>/src/**/__tests__/**/*.[jt]s',
     '<rootDir>/packages/**/**/*.(spec|test).[jt]s'
