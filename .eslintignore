@@ -1,2 +1,3 @@
 /dist
 /storybook-static
+/packages/**/**/*.test.js
