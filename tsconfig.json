@@ -6,7 +6,6 @@
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
-    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -30,13 +29,8 @@
   },
   "include": [
     "packages/**/*.ts",
-    "packages/**/*.js",
     "packages/**/*.tsx",
-    "packages/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "packages/shims-vue.d.ts",
-    "packages/main.js",
+    "packages/**/**/*.vue",
   ],
   "exclude": [
     "node_modules"

@@ -2,7 +2,7 @@
   "name": "base-x-ui",
   "version": "0.1.15",
   "scripts": {
-    "build": "vue-cli-service build --target lib --name base-x-ui --dest dist ./src/main.ts",
+    "build": "vue-cli-service build --target lib --name base-x-ui --dest dist ./packages/main.ts",
     "build-storybook": "build-storybook",
     "storybook": "start-storybook -p 6006",
     "test:unit": "vue-cli-service test:unit",
