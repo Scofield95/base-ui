@@ -92,7 +92,7 @@ export const 虚线按钮 = dashedButton.bind({})
  * 尺寸按钮
  */
 const SizeButton = (args) => ({
-  components: { BaseButton },
+  components: { BaseButton, BaseSpace },
   setup () {
     return { args }
   },
@@ -130,7 +130,7 @@ const IconButton = (args) => ({
   template: `
       <BaseButton>
         <template #icon>
-          <base-icon type="ArrowUpOutlined"></base-icon>
+          <base-icon type="ArrowUpOutlined" color="#fff"></base-icon>
         </template>
         图标</BaseButton>
     `
