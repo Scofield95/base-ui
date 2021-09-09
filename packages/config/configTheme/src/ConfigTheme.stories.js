@@ -1,5 +1,5 @@
 import BaseConfigTheme from '@/config/configTheme/src/ConfigTheme.vue'
-import BaseButton from '@/base/button/src/Button.vue'
+import BaseButton from '@/base/button/src/Button.tsx'
 
 export default {
   title: '配置组件/Theme 配置',

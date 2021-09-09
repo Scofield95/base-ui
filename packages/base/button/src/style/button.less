@@ -1,0 +1,42 @@
+.bs_button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  
+    height: var(--size);
+    padding: 0 10px;
+  
+    background: var(--background, "#fff");
+    color: var(--font-color, "#333");
+    border: 1px var(--borderstyle) var(--borderColor, "#333");
+    border-radius: 6px;
+  
+    outline: none;
+    cursor: pointer;
+  
+    &:hover{
+      background: var(--background-hover)
+    }
+  
+    &:active{
+      background: var(--background-active)
+    }
+  
+    &.block {
+      width: 100% !important;
+    }
+  
+  
+    .u-icon + span {
+      margin-left: 6px;
+    }
+    .u-font {
+      font-weight: var(--fontWeiget);
+      line-height: 18px;
+      padding-left: 3px;
+    }
+    .iconfont {
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }

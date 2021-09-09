@@ -1,6 +1,6 @@
 import BaseSpace from '@/layout/space/src/Space.vue'
 import BaseConfigTheme from '@/config/configTheme/src/ConfigTheme.vue'
-import BaseButton from '@/base/button/src/Button.vue'
+import BaseButton from '@/base/button/src/Button.tsx'
 import 'src/style/reset.less'
 
 export default {

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { provide, reactive, ref, defineComponent } from 'vue'
+import { provide, defineComponent } from 'vue'
 
 // Pixel unit
 export default defineComponent({
@@ -24,11 +24,7 @@ export default defineComponent({
   },
 
   setup (props) {
-    const pixelUnit = ref('px')
-    const baseColor = reactive(props.baseColor)
-
-    provide('pixelUnit', pixelUnit)
-    provide('baseColor', baseColor)
+    provide('baseColor', props.baseColor)
   }
 })
 </script>

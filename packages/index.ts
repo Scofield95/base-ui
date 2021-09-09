@@ -1,4 +1,4 @@
-import Button from '@/base/button/src/Button.vue'
+import Button from '@/base/button/src/Button'
 import Checkbox from '@/form/checkbox/src/Checkbox.vue'
 import CheckboxGroup from '@/form/checkbox/src/CheckboxGroup.vue'
 

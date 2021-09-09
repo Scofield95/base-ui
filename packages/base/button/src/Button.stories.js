@@ -1,5 +1,4 @@
-import BaseConfigTheme from '@/config/configTheme/src/ConfigTheme.vue'
-import BaseButton from '@/base/button/src/Button.vue'
+import BaseButton from '@/base/button/src/Button.tsx'
 import 'src/style/reset.less'
 
 export default {
@@ -7,7 +6,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: '配置颜色大小的'
+        component: '按钮的props'
       }
     }
   },
@@ -44,37 +43,60 @@ export default {
     },
     dashed: {
       description: '虚线按钮，背景色为空'
+    },
+    // 形状
+    block: {
+      description: '块级button'
+    },
+    circle: {
+      description: '圆形button'
+    },
+    round: {
+      description: '圆角button'
     }
-    // onClick: {
-    //   table: {
-    //     category: 'Events',
-    //     subcategory: 'Button Events',
-    //   }
-    // }
   }
 }
 
 const Template = (args) => ({
-  components: { BaseButton, BaseConfigTheme },
+  components: { BaseButton },
   setup () {
     return { args }
   },
-  template: `<BaseConfigTheme>
-                <base-button v-bind="args">按钮</base-button>
-            </BaseConfigTheme>`
+  template: `<BaseButton v-bind="args">按钮</BaseButton>
+           `
 })
 
-export const Button = Template.bind({})
+export const 基础按钮 = Template.bind({})
 
-Button.args = {
-  type: 'primary'
+基础按钮.args = {
+  type: 'primary',
+  dashed: false,
+  block: false,
+  circle: false,
+  round: false
 }
 
-Button.parameters = {
-  backgrounds: {
-    values: [
-      { name: 'red', value: '#f00' },
-      { name: 'green', value: '#0f0' }
-    ]
-  }
+const dashedButton = (args) => ({
+  components: { BaseButton },
+  setup () {
+    return { args }
+  },
+  template: ` <BaseButton v-bind="args">虚线按钮</BaseButton>`
+})
+export const 虚线按钮 = dashedButton.bind({})
+虚线按钮.args = {
+  dashed: true
+}
+
+const Template1 = (args) => ({
+  components: { BaseButton },
+  setup () {
+    return { args }
+  },
+  template: ` <BaseButton v-bind="args">尺寸</BaseButton>`
+})
+export const 尺寸 = Template1.bind({})
+尺寸.args = {
+  size: 'small',
+  label: 'Button'
 }
