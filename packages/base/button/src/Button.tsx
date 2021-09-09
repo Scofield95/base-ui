@@ -37,10 +37,6 @@ export default defineComponent({
       type: String as PropType<Size>,
       default: "default"
     },
-    icon: {
-      type: String,
-      default: ""
-    },
     block: {
       type: Boolean,
       default: false
@@ -50,6 +46,10 @@ export default defineComponent({
       default: false
     },
     round: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     }
@@ -77,7 +77,7 @@ export default defineComponent({
         "--background": useButtonBackground(props, baseColor),
         "--background-hover": useButtonBackgroundHover(props, baseColor),
         "--background-active": useButtonBackgroundActive(props, baseColor),
-        "--font-color": useButtonFontColor(props),
+        "--font-color": useButtonFontColor(props, baseColor),
 
         "--borderstyle": props.dashed ? "dashed" : "solid",
         "--borderColor": props.type
@@ -90,15 +90,16 @@ export default defineComponent({
   },
 
   render () {
-    const { $slots, icon, block, buttonStyle } = this
+    const { $slots, disabled, block, buttonStyle } = this
 
     return (
       <button
-        class={[`bs_button`, block ? "block" : ""]}
+        disabled={disabled}
+        class={[`bs_button`, disabled ? 'disabled' : '', block ? "block" : ""]}
         style={buttonStyle}
         onClick={this.handleClick}
       >
-        <i class={`iconfont ${icon}`}></i>
+        {$slots.icon?.()}
         {$slots.default?.()}
       </button>
     )

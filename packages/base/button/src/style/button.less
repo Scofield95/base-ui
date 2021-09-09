@@ -13,7 +13,16 @@
   
     outline: none;
     cursor: pointer;
-  
+    &.disabled{
+      background: none;
+      cursor: not-allowed;
+      color: rgb(51, 54, 57);
+      border-color: rgb(51, 54, 57);
+      opacity: 0.5;
+      &:hover,&:active{
+        background: none;
+      }
+    }
     &:hover{
       background: var(--background-hover)
     }

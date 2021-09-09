@@ -41,13 +41,16 @@ export function useButtonBackgroundHover<T extends props, C extends IBaseColor> 
 
 // 计算按钮active的颜色
 export function useButtonBackgroundActive<T extends props, C extends IBaseColor> (props: T, color: C) {
+  if (props.dashed) {
+    return '#fff'
+  }
   return Color(useButtonBackground(props, color)).darken(0.1).hex()
 }
 
 // 计算按钮的字体颜色
-export function useButtonFontColor (props: props): string {
+export function useButtonFontColor<T extends props, C extends IBaseColor> (props: T, color: C): string {
   if (props.dashed) {
-    return props.type || '#333'
+    return color[(props.type as string)] || '#333'
   }
   if (props.type !== 'default') {
     return '#fff'
