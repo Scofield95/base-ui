@@ -1,6 +1,6 @@
 import Color from 'color'
 import { IBaseColor } from '@/theme/interface'
-import type { Type, Size } from "./types"
+import type { Size } from "./types"
 
 interface props {
   dashed?: Boolean;
@@ -29,9 +29,9 @@ export function useButtonBackground<T extends props, C extends IBaseColor> (prop
   if (props.type) {
     return color[(props.type as string)]
   } else if (props.color) {
-    return '#ddd'
+    return props.color
   }
-  return '#fff'
+  return color.primary
 }
 
 // 计算按钮hover的颜色

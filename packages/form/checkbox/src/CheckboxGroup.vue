@@ -1,5 +1,5 @@
 <template>
-  <div class="base-checkbox_group">
+  <div class="ba-checkbox_group">
     <slot />
   </div>
 </template>
@@ -40,9 +40,9 @@ export default defineComponent({
 })
 </script>
 <style lang="less" scoped>
-.base-checkbox_group{
-  &:deep(.base-checkbox) {
-      & + .base-checkbox{
+.ba-checkbox_group{
+  &:deep(.ba-checkbox) {
+      & + .ba-checkbox{
         margin-left: 12px;
       }
   }

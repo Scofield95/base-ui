@@ -41,22 +41,33 @@ export default {
     },
     color: {
       control: 'color',
-      description: '自定义颜色'
+      description: '自定义颜色',
+      table: {
+        category: '自定义颜色',
+        type: {
+          summary: '详情',
+          detail: `颜色色值`
+        }
+      }
     },
     dashed: {
+      control: { type: 'boolean' },
       description: '虚线按钮，背景色为空'
     },
     // 形状
     block: {
+      control: { type: 'boolean' },
       description: '块级button'
     },
     circle: {
       description: '圆形button'
     },
     round: {
+      control: { type: 'boolean' },
       description: '圆角button'
     },
     disable: {
+      control: { type: 'boolean' },
       description: '是否禁用'
     }
   }
@@ -72,7 +83,15 @@ const Template = (args) => ({
 })
 
 export const 基础按钮 = Template.bind({})
-
+基础按钮.args = {
+  type: 'primary',
+  size: 'default',
+  dashed: false,
+  block: false,
+  circle: false,
+  round: false,
+  disable: false
+}
 /**
  * 虚线按钮
  */
@@ -97,10 +116,10 @@ const SizeButton = (args) => ({
     return { args }
   },
   template: `<BaseSpace>
-      <BaseButton size="mini" type="primary">尺寸按钮</BaseButton>
-      <BaseButton size="small" type="success">尺寸按钮</BaseButton>
-      <BaseButton type="info">尺寸按钮</BaseButton>
-      <BaseButton size="large" type="warning">尺寸按钮</BaseButton>
+      <BaseButton size="mini" type="primary">mini按钮</BaseButton>
+      <BaseButton size="small" type="success">小型按钮</BaseButton>
+      <BaseButton type="info">默认按钮</BaseButton>
+      <BaseButton size="large" type="warning">大号按钮</BaseButton>
     </BaseSpace>`
 })
 export const 尺寸按钮 = SizeButton.bind({})
@@ -136,3 +155,15 @@ const IconButton = (args) => ({
     `
 })
 export const icon按钮 = IconButton.bind({})
+/**
+ * 自定义颜色按钮
+ */
+const customButton = () => ({
+  components: { BaseSpace, BaseButton },
+  template: `<BaseSpace>
+    <BaseButton color="#8a2be2">#8a2be2</BaseButton>
+    <BaseButton color="#ff69b4">#ff69b4</BaseButton>
+    <BaseButton color="#8a2be2">虚线按钮</BaseButton>
+  </BaseSpace>`
+})
+export const 自定义颜色 = customButton.bind({})

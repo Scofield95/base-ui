@@ -1,3 +1,16 @@
+
+<template>
+  <button
+    :disabled="disabled"
+    :class="[`bs_button`, disabled ? 'disabled' : '', block ? 'block' : '']"
+    :style="buttonStyle"
+    @Click="handleClick"
+  >
+    <slot name="icon" />
+    <slot />
+  </button>
+</template>
+<script lang='ts'>
 import { inject, defineComponent, PropType, CSSProperties } from "vue"
 import {
   useButtonSize,
@@ -17,7 +30,7 @@ export default defineComponent({
   props: {
     type: {
       type: String,
-      default: ''
+      default: 'primary'
     }, // [primary, success, warning, error]
     dashed: {
       // 虚线/实线
@@ -31,7 +44,7 @@ export default defineComponent({
     },
     color: {
       type: String,
-      default: ''
+      default: 'primary'
     }, // primary,error,waring
     size: {
       type: String as PropType<Size>,
@@ -87,21 +100,23 @@ export default defineComponent({
 
       handleClick
     }
-  },
-
-  render () {
-    const { $slots, disabled, block, buttonStyle } = this
-
-    return (
-      <button
-        disabled={disabled}
-        class={[`bs_button`, disabled ? 'disabled' : '', block ? "block" : ""]}
-        style={buttonStyle}
-        onClick={this.handleClick}
-      >
-        {$slots.icon?.()}
-        {$slots.default?.()}
-      </button>
-    )
   }
+
+  //   return (
+  //     <button
+  //       disabled={disabled}
+  //       class={[`bs_button`, disabled ? 'disabled' : '', block ? "block" : ""]}
+  //       style={buttonStyle}
+  //       onClick={this.handleClick}
+  //     >
+  //       {$slots.icon?.()}
+  //       {$slots.default?.()}
+  //     </button>
+  //   )
+  // }
 })
+</script>
+
+<style>
+
+</style>

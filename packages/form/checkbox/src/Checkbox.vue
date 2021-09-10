@@ -1,7 +1,7 @@
 <template>
   <label
     :class="[
-      'base-checkbox',
+      'ba-checkbox',
       isChecked ? 'isChecked' : '',
     ]"
     :style="baseStyle"
@@ -69,7 +69,7 @@ export default defineComponent({
 })
 </script>
 <style lang="less" scoped>
-.base-checkbox{
+.ba-checkbox{
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
