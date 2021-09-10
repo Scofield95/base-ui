@@ -30,6 +30,14 @@ module.exports = {
       include: path.resolve(__dirname, '../'),
     });
 
+    // config.output = {
+    //    path: path.resolve(__dirname, '../docs'),
+    //    filename: '[name].[contenthash].iframe.bundle.js',
+    //    publicPath: '',
+    //  }
+
+     console.log('config', configType)
+
     // config.module.rules.push({
     //   test: /\.vue$/,
     //   use: ['raw-loader'],
