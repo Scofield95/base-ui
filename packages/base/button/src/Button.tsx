@@ -41,14 +41,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    circle: {
-      type: Boolean,
-      default: false
-    },
-    round: {
-      type: Boolean,
-      default: false
-    },
+
     disabled: {
       type: Boolean,
       default: false
@@ -95,7 +88,11 @@ export default defineComponent({
     return (
       <button
         disabled={disabled}
-        class={[`bs_button`, disabled ? 'disabled' : '', block ? "block" : ""]}
+        class={[
+          `bs_button`,
+          disabled ? 'disabled' : '',
+          block ? "block" : ""
+        ]}
         style={buttonStyle}
         onClick={this.handleClick}
       >

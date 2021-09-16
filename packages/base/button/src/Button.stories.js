@@ -59,13 +59,7 @@ export default {
       control: { type: 'boolean' },
       description: '块级button'
     },
-    circle: {
-      description: '圆形button'
-    },
-    round: {
-      control: { type: 'boolean' },
-      description: '圆角button'
-    },
+
     disable: {
       control: { type: 'boolean' },
       description: '是否禁用'
@@ -88,8 +82,6 @@ export const 基础按钮 = Template.bind({})
   size: 'default',
   dashed: false,
   block: false,
-  circle: false,
-  round: false,
   disable: false
 }
 /**
